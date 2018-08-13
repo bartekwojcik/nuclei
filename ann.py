@@ -33,7 +33,7 @@ first =Dense(46, activation='relu')(inputs)
 
 #last
 layer45 = Dense(45, activation='linear')(first)
-layer1 = Dense(1, activation='tanh')(first)
+layer1 = Dense(1, activation='sigmoid')(first)
 out = [layer1,layer45]
 #end last
 
@@ -61,4 +61,9 @@ inversed_y_predicted_L = scalarY_L.inverse_transform(ynew[0])
 inversed_y_predicted_R = scalarY_R.inverse_transform(ynew[1])
 print("REAL VALUES")
 for i in range(len(inversed_X_test)):
-	print("X=%s\n P=%s,%s\n A=%s,%s" % (inversed_X_test[i], inversed_y_predicted_L[i],inversed_y_predicted_R[i], inversed_Y_test_L[i],inversed_Y_test_R[i]))
+    real = inversed_Y_test_R[i]
+    predicted = inversed_y_predicted_R[i]
+    div = real.copy()
+    div[div == 0] = 1
+    diff = (real-predicted)/div
+    print("X=%s\n P=%s,%s\n A=%s,%s \n D=%s" % (inversed_X_test[i], inversed_y_predicted_L[i],inversed_y_predicted_R[i], inversed_Y_test_L[i],inversed_Y_test_R[i], diff))
