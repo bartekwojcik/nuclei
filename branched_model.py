@@ -5,8 +5,9 @@ from sklearn.model_selection import train_test_split
 import matplotlib.pyplot as plt
 
 class BranchedModel:
-    @staticmethod
-    def get_model(size):
+
+
+    def get_model(self,size):
         inputs = Input(shape=size)
         first = Dense(31, activation='relu')(inputs)
         # last
@@ -18,8 +19,8 @@ class BranchedModel:
         model.compile(loss=['binary_crossentropy', 'mean_squared_error'], optimizer='adam')
         return model
 
-    @staticmethod
-    def get_data(x_train,y_train):
+
+    def get_data(self,x_train,y_train):
         """
         :param X:
         :param Y:
@@ -42,8 +43,8 @@ class BranchedModel:
 
         return x_train, [y_train_L,y_train_R], [scalarX, scalarY_L, scalarY_R]
 
-    @staticmethod
-    def predict(model,history,scalars, x_test, y_test):
+
+    def predict(self,model,history,scalars, x_test, y_test):
         scalarY_L = scalars[1]
         scalarY_R = scalars[2]
         scalarX = scalars[0]
